@@ -1,4 +1,4 @@
-# tiktok_clone
+# RhythmRave
 
 A new Flutter project.
 
