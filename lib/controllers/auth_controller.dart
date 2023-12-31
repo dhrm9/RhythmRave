@@ -29,7 +29,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => LoginScreen());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => const HomeScreen());
     }
   }
 
@@ -76,7 +76,7 @@ class AuthController extends GetxController {
             uid: cred.user!.uid);
 
         await firestore
-            .collection('users')
+            .collection('user')
             .doc(cred.user!.uid)
             .set(user.toJson());
       } else {
@@ -93,12 +93,15 @@ class AuthController extends GetxController {
       if (email.isNotEmpty && password.isNotEmpty) {
         await firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password);
-        print('logged in successfully');
       } else {
         Get.snackbar('Error Logging in', 'Please enter all the fields');
       }
     } catch (e) {
       Get.snackbar('Error Logging in', e.toString());
     }
+  }
+
+  signOut() async {
+    await firebaseAuth.signOut();
   }
 }
